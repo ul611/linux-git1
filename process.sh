@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 ./tmp/process.awk $1
 
 gnuplot -persist <<-EOFMarker
