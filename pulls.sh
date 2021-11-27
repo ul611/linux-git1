@@ -28,6 +28,6 @@ done
 MERGED=$(curl -s -H "Accept: application/vnd.github.v3+json" 'https://api.github.com/repos/datamove/linux-git2/pulls/'"$EARLIEST" | jq '.merged')
 echo 'EARLIEST '"$EARLIEST"
 
-MERGED=$(( MERGED ? 1 : 0 ))
+MERGED=$(( MERGED=='true' ? 1 : 0 ))
 
 echo 'MERGED '"$MERGED"
