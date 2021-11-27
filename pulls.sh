@@ -24,9 +24,8 @@ FLAG=$(( TMP ? 1 : FLAG ))
 
 done
 
-echo 'EARLIEST '"$EARLIEST"
-
 MERGED=$(curl -s -H "Accept: application/vnd.github.v3+json" 'https://api.github.com/repos/datamove/linux-git2/pulls/'"$EARLIEST" | jq '.merged')
 MERGED=$(( MERGED ? 1 : 0 ))
 
+echo 'EARLIEST '"$EARLIEST"
 echo 'MERGED '"$MERGED"
