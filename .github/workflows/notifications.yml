@@ -5,7 +5,7 @@ on:
     branches:
       - main
     paths:
-      - 'Linux_features_42tests/README.md'
+      - 'README.md'
             
         
 
