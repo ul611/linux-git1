@@ -1,11 +1,13 @@
 name: Hello
 
-on: [push]
-    repository:
-        - name:
-            Linux_features_42tests
+on:
+  push:
+    branches:
+      - main
     paths:
-        - 'README.md'
+      - 'Linux_features_42tests/README.md'
+            
+        
 
 jobs:
   Hello:
