@@ -31,9 +31,9 @@ jobs:
           echo "Hello"
       
       - name: send message
-        run: |
-          python send_message.py
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           CHAT_ID: ${{ secrets.CHAT_ID }}
           PROJECT_NAME: "Hello"
+        run: |
+          python send_message.py
