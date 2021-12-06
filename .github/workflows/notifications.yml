@@ -22,9 +22,6 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
-      - name: create tmp file
-        run: |
-          touch "tmp.txt"
       - name: check updates
         id: checkupdates
         run: |
@@ -35,6 +32,7 @@ jobs:
       
       - name: send message
         run: |
+          chmod u+x send_message.py
           python send_message.py
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
