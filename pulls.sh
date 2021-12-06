@@ -6,7 +6,6 @@ PULLS=0
 
 for i in `seq 4`
 do
-
 PULLS=$((PULLS+$(curl -s -H "Accept: application/vnd.github.v3+json" 'https://api.github.com/repos/datamove/linux-git2/pulls?state=all&per_page=100&page='"$i" | jq '.[].user.login' | grep "$nickname" | wc -l)))
 done
 
