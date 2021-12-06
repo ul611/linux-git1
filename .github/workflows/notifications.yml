@@ -24,14 +24,17 @@ jobs:
         run: |
          python -m pip install --upgrade pip
          pip install -r requirements.txt
-      - name: check updates
-        id: checkupdates
+      - name: check BEFORE
+        id: checkBEFORE
         run: |
-          echo "::set-output name=AFTER::$(git diff ${{ github.event.before }} ${{ github.event.after }} | grep -E '+_Некоторые особенности .*' ) "
-          echo "::set-output name=BEFORE::$(git diff ${{ github.event.before }} ${{ github.event.after }} | grep -E '\-_Некоторые особенности .*' ) "
+          echo "::set-output name=BEFORE::$'(git diff ${{ github.event.before }} ${{ github.event.after }} | grep -E \'\-_Некоторые особенности .*\' )' "
+      - name: check AFTER
+        id: checkAFTER
+        run: |
+          echo "::set-output name=AFTER::$'(git diff ${{ github.event.before }} ${{ github.event.after }} | grep -E \'+_Некоторые особенности .*\' )' "
       - name: get updates
         id: getupdates
-        run: ::set-output name=PROJECT_NAME::$(AFTER=${{ steps.checkupdates.outputs.AFTER }} BEFORE=${{ steps.checkupdates.outputs.BEFORE }} python3 get_updates.py)
+        run: ::set-output name=PROJECT_NAME::$(AFTER=${{ steps.checkAFTER.outputs.AFTER }} BEFORE=${{ steps.checkBEFORE.outputs.BEFORE }} python3 get_updates.py)
       
       - name: send message
         run: TELEGRAM_BOT_TOKEN=${{ secrets.TELEGRAM_BOT_TOKEN }} CHAT_ID=${{ secrets.CHAT_ID }} PROJECT_NAME=${{ steps.getupdates.outputs.PROJECT_NAME }} python3 send_message.py
