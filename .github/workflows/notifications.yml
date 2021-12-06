@@ -24,7 +24,7 @@ jobs:
       - name: check updates
         id: checkupdates
         run: |
-          echo "$( git diff ${{ github.event.before }}..${{ github.sha }} )"
+          echo ${{ github.content }}
       - name: get updates
         run: |
           echo "$( git diff ${{ github.event.before }}..${{ github.sha }} )"
