@@ -27,7 +27,7 @@ jobs:
       - name: check updates
         id: checkupdates
         run: |
-          echo "::set-output name=files::$(git diff --name-only ${{ context.payload.before }} ${{ context.payload.after }}| xargs) "
+          echo "::set-output name=files::$(git diff --name-only ${{ github.event.before }} ${{ github.event.after }}| xargs) "
       - name: get updates
         run: |
           echo "${{ github.event.push.compare }}"
