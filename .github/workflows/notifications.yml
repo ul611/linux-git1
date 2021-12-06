@@ -23,17 +23,11 @@ jobs:
           pip install -r requirements.txt
       - name: check updates
         id: checkupdates
-        continue-on-error: false
         run: |
-          echo "::set-output name=grepValue::$( git diff ${{ github.event.before }}..${{ github.sha }} )"
-          # if [ echo "$( git diff --name-only ${{ github.event.before }}..${{ github.sha }})" ]
-          # then
-          #  echo "There are no updates on tips"
-          #  exit 1
-          # fi
+          echo "$( git diff ${{ github.event.before }}..${{ github.sha }} )"
       - name: get updates
         run: |
-          echo "::set-output name=grepValue::$( git diff ${{ github.event.before }}..${{ github.sha }} | grep -c '^proxy' )"
+          echo "$( git diff ${{ github.event.before }}..${{ github.sha }} )"
       
       - name: send message
         run: |
