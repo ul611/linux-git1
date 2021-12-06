@@ -6,7 +6,7 @@ on:
       - main
     paths:
       - 'README.md'
-      - 'notifications.yml'
+      - '*notifications.yml'
 
 jobs:
   Check_commit:
