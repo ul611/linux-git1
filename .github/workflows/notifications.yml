@@ -25,14 +25,10 @@ jobs:
       - name: check updates
         id: checkupdates
         run: |
-          echo "${{ github.compare.ref }}"
+          echo "::set-output name=files::$(git diff --name-only ${{ github.base_ref}} ${{ github.event.before }}| xargs) "
       - name: get updates
         run: |
           echo "Hello"
       
       - name: send message
-        env:
-          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
-          CHAT_ID: ${{ secrets.CHAT_ID }}
-          PROJECT_NAME: "Hello"
         run: TELEGRAM_BOT_TOKEN=${{ secrets.TELEGRAM_BOT_TOKEN }} CHAT_ID=${{ secrets.CHAT_ID }} PROJECT_NAME="Hello" python3 send_message.py
