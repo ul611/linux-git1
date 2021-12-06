@@ -21,3 +21,4 @@ requests.get(f'https://api.telegram.org/bot{TOKEN}/sendMessage', params=dict(
    chat_id=CHAT_ID,
    text=f'Info on tips for 42 project {PROJECT_NAME} was {action} repo'
 ))
+
