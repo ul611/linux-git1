@@ -25,10 +25,10 @@ jobs:
       - name: check updates
         id: checkupdates
         run: |
-          echo ${{ github.content }}
+          echo "{name}={value}" >> $PROJECT_NAME
       - name: get updates
         run: |
-          echo "$( git diff ${{ github.event.before }}..${{ github.sha }} )"
+          echo "$( git diff ${{ github.event.before }}^..${{ github.sha }} )"
       
       - name: send message
         run: |
@@ -36,4 +36,4 @@ jobs:
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           CHAT_ID: ${{ secrets.CHAT_ID }}
-          PROJECT_NAME: ""
+          PROJECT_NAME: $PROJECT_NAME
