@@ -25,14 +25,13 @@ jobs:
       - name: check updates
         id: checkupdates
         run: |
-          echo ${{ github.compare }}
+          echo "${{ github.compare }}"
       - name: get updates
         run: |
-          echo ${{ github.compare }}
+          echo "Hello"
       
       - name: send message
         run: |
-          chmod u+x send_message.py
           python send_message.py
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
