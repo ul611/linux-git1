@@ -6,7 +6,7 @@ on:
       - main
     paths:
       - 'README.md'
-      - '.github/workflows/notifications.yml'
+#      - '.github/workflows/notifications.yml'
 
 jobs:
   Check_commit:
@@ -27,10 +27,11 @@ jobs:
       - name: check updates
         id: checkupdates
         run: |
-          echo "::set-output name=files::$(git diff ${{ github.event.before }} ${{ github.event.after }} | grep -E '+_Некоторые особенности .*' ) "
+          echo "::set-output name=AFTER::$(git diff ${{ github.event.before }} ${{ github.event.after }} | grep -E '+_Некоторые особенности .*' ) "
+          echo "::set-output name=BEFORE::$(git diff ${{ github.event.before }} ${{ github.event.after }} | grep -E '-_Некоторые особенности .*' ) "
       - name: get updates
-        run: |
-          echo "$files"
+        id: getupdates
+        run: ::set-output name=PROJECT_NAME::$(AFTER=${{ steps.checkupdates.outputs.AFTER }} BEFORE=${{ steps.checkupdates.outputs.BEFORE }} python3 get_updates.py)
       
 #       - name: send message
-#         run: TELEGRAM_BOT_TOKEN=${{ secrets.TELEGRAM_BOT_TOKEN }} CHAT_ID=${{ secrets.CHAT_ID }} PROJECT_NAME="Hello" python3 send_message.py
+#         run: TELEGRAM_BOT_TOKEN=${{ secrets.TELEGRAM_BOT_TOKEN }} CHAT_ID=${{ secrets.CHAT_ID }} PROJECT_NAME=${{ steps.getupdates.outputs.PROJECT_NAME }} python3 send_message.py
