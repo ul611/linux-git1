@@ -25,7 +25,7 @@ jobs:
       - name: check updates
         id: checkupdates
         run: |
-          echo "{name}={value}" >> $PROJECT_NAME
+          echo "{name}={value}" >> "$PROJECT_NAME"
       - name: get updates
         run: |
           echo "$( git diff ${{ github.event.before }}^..${{ github.sha }} )"
