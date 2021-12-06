@@ -28,7 +28,7 @@ jobs:
           echo "::set-output name=files::$(git diff --name-only ${{ github.payload.before }} ${{ github.payload.after }}| xargs) "
       - name: get updates
         run: |
-          echo "$files"
+          echo "${{ github.event.push.compare }}"
       
 #       - name: send message
 #         run: TELEGRAM_BOT_TOKEN=${{ secrets.TELEGRAM_BOT_TOKEN }} CHAT_ID=${{ secrets.CHAT_ID }} PROJECT_NAME="Hello" python3 send_message.py
