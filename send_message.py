@@ -9,7 +9,7 @@ import os
 import requests
 
 # get evvironment variables
-TOKEN = os.environ.get('TOKEN')
+TOKEN = os.environ.get('TELEGRAM_BOT_TOKEN')
 CHAT_ID = os.environ.get('CHAT_ID')
 PROJECT_NAME = os.environ.get('PROJECT_NAME')
 
