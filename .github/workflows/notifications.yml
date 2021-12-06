@@ -28,7 +28,7 @@ jobs:
         id: checkupdates
         run: |
           echo "::set-output name=AFTER::$(git diff ${{ github.event.before }} ${{ github.event.after }} | grep -E '+_Некоторые особенности .*' ) "
-          echo "::set-output name=BEFORE::$(git diff ${{ github.event.before }} ${{ github.event.after }} | grep -E '-_Некоторые особенности .*' ) "
+          echo "::set-output name=BEFORE::$(git diff ${{ github.event.before }} ${{ github.event.after }} | grep -E '\-_Некоторые особенности .*' ) "
       - name: get updates
         id: getupdates
         run: ::set-output name=PROJECT_NAME::$(AFTER=${{ steps.checkupdates.outputs.AFTER }} BEFORE=${{ steps.checkupdates.outputs.BEFORE }} python3 get_updates.py)
