@@ -6,7 +6,7 @@ on:
       - main
     paths:
       - 'README.md'
-      - '.github/workflows/notifications.yml'
+#       - '.github/workflows/notifications.yml'
 
 jobs:
   Check_commit:
@@ -27,7 +27,7 @@ jobs:
       - name: check updates
         id: checkupdates
         run: |
-          echo "::set-output name=files::$(git diff ${{ github.event.before }} ${{ github.event.after }}) | grep -E "+_Некоторые особенности .*""
+          echo "::set-output name=files::$(git diff ${{ github.event.before }} ${{ github.event.after }}) | grep -E '+_Некоторые особенности .*'"
       - name: get updates
         run: |
           echo "$files"
