@@ -16,14 +16,14 @@ jobs:
         uses: actions/checkout@v2
         with:
          fetch-depth: 0
-#       - name: setup python
-#        uses: actions/setup-python@v2
-#        with:
-#          python-version: 3.9
-#       - name: install python packages
-#        run: |
-#          python -m pip install --upgrade pip
-#          pip install -r requirements.txt
+      - name: setup python
+        uses: actions/setup-python@v2
+        with:
+         python-version: 3.9
+      - name: install python packages
+        run: |
+         python -m pip install --upgrade pip
+         pip install -r requirements.txt
       - name: check updates
         id: checkupdates
         run: |
@@ -33,5 +33,5 @@ jobs:
         id: getupdates
         run: ::set-output name=PROJECT_NAME::$(AFTER=${{ steps.checkupdates.outputs.AFTER }} BEFORE=${{ steps.checkupdates.outputs.BEFORE }} python3 get_updates.py)
       
-#       - name: send message
-#         run: TELEGRAM_BOT_TOKEN=${{ secrets.TELEGRAM_BOT_TOKEN }} CHAT_ID=${{ secrets.CHAT_ID }} PROJECT_NAME=${{ steps.getupdates.outputs.PROJECT_NAME }} python3 send_message.py
+      - name: send message
+        run: TELEGRAM_BOT_TOKEN=${{ secrets.TELEGRAM_BOT_TOKEN }} CHAT_ID=${{ secrets.CHAT_ID }} PROJECT_NAME=${{ steps.getupdates.outputs.PROJECT_NAME }} python3 send_message.py
