@@ -19,7 +19,7 @@ AFTER = set(AFTER.split(', '))
 BEFORE = set(BEFORE.split(', '))
 
 # form progect name
-project_name = ', '.join(list(AFTER.difference(BEFORE))).replace(' (edited)', '')
+project_name = ', '.join(list(AFTER.difference(BEFORE)))
 
 # identify action 
 action = 'updated in' if 'edited' in project_name else 'added to'
@@ -27,6 +27,6 @@ action = 'updated in' if 'edited' in project_name else 'added to'
 # make GET request: send message to private telegram channel about updates in repo
 requests.get(f'https://api.telegram.org/bot{TOKEN}/sendMessage', params=dict(
    chat_id=CHAT_ID,
-   text=f'Info on tips for 42 project {project_name} was {action} repo'
+   text=f'Info on tips for 42 project {project_name.replace(' (edited)', '')} was {action} repo'
 ))
 
