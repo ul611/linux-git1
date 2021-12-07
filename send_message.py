@@ -19,7 +19,7 @@ AFTER = set(AFTER.split(', '))
 BEFORE = set(BEFORE.split(', '))
 
 # form progect name
-project_name = ', '.join(list(AFTER.difference(BEFORE)))
+project_name = ', '.join(list(AFTER.difference(BEFORE))).replace(' (edited)', '')
 
 # identify action 
 action = 'updated in' if 'edited' in project_name else 'added to'
