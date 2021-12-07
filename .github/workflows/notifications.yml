@@ -31,7 +31,7 @@ jobs:
       - name: check AFTER
         id: checkAFTER
         run: |
-          echo "::set-output name=AFTER::$'(git diff ${{ github.event.before }} ${{ github.event.after }} | grep -E "'"'"+_Некоторые особенности .*"'"'" )' "
+          echo '::set-output name=AFTER::$"(git diff ${{ github.event.before }} ${{ github.event.after }} | grep -E '"'"'+_Некоторые особенности .*'"'"' )" '
 #       - name: get updates
 #         id: getupdates
 #         run: |
