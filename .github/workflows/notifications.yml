@@ -34,16 +34,16 @@ jobs:
         run: |
           export AFTER=$(git diff ${{ github.event.before }} ${{ github.event.after }} | grep -E '\+_Некоторые особенности .*' )
           echo "::set-output name=AFTER::$AFTER"
-      - name: check difference
-        id: checkdiff
-        continue-on-error: false
-        run: |
-         AFTER="${{ steps.getAFTER.outputs.AFTER }}" 
-         BEFORE="${{ steps.getBEFORE.outputs.BEFORE }}"
-         if [ $AFTER = "" ]
-         then
-           exit 0
-         fi
+#       - name: check difference
+#         id: checkdiff
+#         continue-on-error: false
+#         run: |
+#          AFTER="${{ steps.getAFTER.outputs.AFTER }}" 
+#          BEFORE="${{ steps.getBEFORE.outputs.BEFORE }}"
+#          if [ $AFTER = "" ]
+#          then
+#            exit 0
+#          fi
 #         if [ ${AFTER: -$(( {#AFTER} - 1 )) } == ${BEFORE: -$(( {#BEFORE} - 1 )) } ]
 #         then
 #           exit 0
