@@ -12,7 +12,6 @@ overflow, then calloc() returns an error), чего нет в мануале д�
 Первая ссылка в гугле будет выглядеть примерно так:
 https://developer.apple.com/library/archive/documentation/System/Conceptual/ManPages_iPhoneOS/man3/calloc.3.html
 
-
 ### Проекты.
 
 #### 1. Libft
