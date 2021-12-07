@@ -27,12 +27,12 @@ jobs:
       - name: check BEFORE
         id: checkBEFORE
         run: |
-          BEFORE=$"(git diff ${{ github.event.before }} ${{ github.event.after }} | grep -E '\-_Некоторые особенности .*' )"
+          BEFORE=$(git diff ${{ github.event.before }} ${{ github.event.after }} | grep -E '\-_Некоторые особенности .*' )
           echo "::set-output name=BEFORE::$BEFORE"
       - name: check AFTER
         id: checkAFTER
         run: |
-          AFTER=$"(git diff ${{ github.event.before }} ${{ github.event.after }} | grep -E '+_Некоторые особенности .*' )"
+          AFTER=$(git diff ${{ github.event.before }} ${{ github.event.after }} | grep -E '+_Некоторые особенности .*' )
           echo "::set-output name=AFTER::$AFTER"
 #       - name: get updates
 #         id: getupdates
