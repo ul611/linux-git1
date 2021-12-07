@@ -40,5 +40,5 @@ jobs:
 #          echo "::set-output name=PROJECT_NAME::$(AFTER=${{ steps.checkAFTER.outputs.AFTER }} BEFORE=${{ steps.checkBEFORE.outputs.BEFORE }} python3 get_updates.py)"
       
       - name: send message
-        run: TELEGRAM_BOT_TOKEN=${{ secrets.TELEGRAM_BOT_TOKEN }} CHAT_ID=${{ secrets.CHAT_ID }} AFTER=$"{{ steps.checkAFTER.outputs.AFTER }}" BEFORE=$"{{ steps.checkBEFORE.outputs.BEFORE }}" python3 send_message.py
+        run: TELEGRAM_BOT_TOKEN=${{ secrets.TELEGRAM_BOT_TOKEN }} CHAT_ID=${{ secrets.CHAT_ID }} AFTER="${{ steps.checkAFTER.outputs.AFTER }}" BEFORE="${{ steps.checkBEFORE.outputs.BEFORE }}" python3 send_message.py
         # PROJECT_NAME=${{ steps.getupdates.outputs.PROJECT_NAME }} 
