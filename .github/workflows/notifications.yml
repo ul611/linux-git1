@@ -27,7 +27,7 @@ jobs:
       - name: get BEFORE value
         id: getBEFORE
         run: |
-          BEFORE=$(git diff ${{ github.event.before }} ${{ github.event.after }} | grep -E '\-_Некоторые особенности .*' )
+          echo BEFORE="$(git diff ${{ github.event.before }} ${{ github.event.after }} | grep -E '\-_Некоторые особенности .*' )"
           echo "::set-output name=BEFORE::$BEFORE"
       - name: get AFTER value
         id: getAFTER
