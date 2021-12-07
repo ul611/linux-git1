@@ -9,7 +9,7 @@ on:
 #      - '.github/workflows/notifications.yml'
 
 jobs:
-  Check_commit:
+  CheckAndSend:
     runs-on: ubuntu-latest
     steps:
       - name: checkout repo content
@@ -24,21 +24,30 @@ jobs:
         run: |
          python -m pip install --upgrade pip
          pip install -r requirements.txt
-      - name: check BEFORE
-        id: checkBEFORE
+      - name: get BEFORE value
+        id: getBEFORE
         run: |
           BEFORE=$(git diff ${{ github.event.before }} ${{ github.event.after }} | grep -E '\-_Некоторые особенности .*' )
           echo "::set-output name=BEFORE::$BEFORE"
-      - name: check AFTER
-        id: checkAFTER
+      - name: get AFTER value
+        id: getAFTER
         run: |
           AFTER=$(git diff ${{ github.event.before }} ${{ github.event.after }} | grep -E '\+_Некоторые особенности .*' )
           echo "::set-output name=AFTER::$AFTER"
+      - name: check difference
+        id: checkdiff
+        continue-on-error: false
+        run: |
+         AFTER="${{ steps.getAFTER.outputs.AFTER }}" 
+         BEFORE="${{ steps.getBEFORE.outputs.BEFORE }}"
+         if [ ${AFTER: -$(( {#AFTER} - 1 )) } == ${BEFORE: -$(( {#BEFORE} - 1 )) } ]
+         then
+           exit 1
+         fi
 #       - name: get updates
 #         id: getupdates
 #         run: |
-#          echo "::set-output name=PROJECT_NAME::$(AFTER=${{ steps.checkAFTER.outputs.AFTER }} BEFORE=${{ steps.checkBEFORE.outputs.BEFORE }} python3 get_updates.py)"
-      
+#          echo "::set-output name=PROJECT_NAME::$(AFTER="${{ steps.checkAFTER.outputs.AFTER }}" BEFORE="${{ steps.checkBEFORE.outputs.BEFORE }}" python3 get_updates.py)"
       - name: send message
-        run: TELEGRAM_BOT_TOKEN=${{ secrets.TELEGRAM_BOT_TOKEN }} CHAT_ID=${{ secrets.CHAT_ID }} AFTER="${{ steps.checkAFTER.outputs.AFTER }}" BEFORE="${{ steps.checkBEFORE.outputs.BEFORE }}" python3 send_message.py
+        run: TELEGRAM_BOT_TOKEN=${{ secrets.TELEGRAM_BOT_TOKEN }} CHAT_ID=${{ secrets.CHAT_ID }} AFTER="${{ steps.getAFTER.outputs.AFTER }}" BEFORE="${{ steps.getBEFORE.outputs.BEFORE }}" python3 send_message.py
         # PROJECT_NAME=${{ steps.getupdates.outputs.PROJECT_NAME }} 
