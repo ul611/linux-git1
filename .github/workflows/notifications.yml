@@ -40,14 +40,14 @@ jobs:
         run: |
          AFTER="${{ steps.getAFTER.outputs.AFTER }}" 
          BEFORE="${{ steps.getBEFORE.outputs.BEFORE }}"
-         if [ $AFTER == "" ]
+         if [ $AFTER = "" ]
          then
            exit 0
          fi
-         if [ ${AFTER: -$(( {#AFTER} - 1 )) } == ${BEFORE: -$(( {#BEFORE} - 1 )) } ]
-         then
-           exit 0
-         fi
+#         if [ ${AFTER: -$(( {#AFTER} - 1 )) } == ${BEFORE: -$(( {#BEFORE} - 1 )) } ]
+#         then
+#           exit 0
+#         fi
 #       - name: get updates
 #         id: getupdates
 #         run: |
