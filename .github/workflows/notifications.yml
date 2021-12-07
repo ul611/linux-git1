@@ -32,7 +32,7 @@ jobs:
       - name: get AFTER value
         id: getAFTER
         run: |
-          AFTER=$(git diff ${{ github.event.before }} ${{ github.event.after }} | grep -E '\+_Некоторые особенности .*' )
+          export AFTER=$(git diff ${{ github.event.before }} ${{ github.event.after }} | grep -E '\+_Некоторые особенности .*' )
           echo "::set-output name=AFTER::$AFTER"
       - name: check difference
         id: checkdiff
